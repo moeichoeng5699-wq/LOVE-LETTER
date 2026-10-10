@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title> ♡ </title>
+
+  <meta name="description"
+        content="จดหมายเล็ก ๆ ที่เขียนขึ้นจากความรู้สึกจริงใจ">
+
+  <style>
+    /* ===== 1. ตั้งค่าพื้นฐาน ===== */
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --paper: #fffaf5;
+      --pink: #bd7481;
+      --dark-pink: #955765;
+      --text: #655D52;
+      --muted: #8C8477;
+      --border: #DED3BB;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Tahoma", serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at top left, #F4E5A8, transparent 48%),
+        linear-gradient(145deg, #FFF9E9, #E9E5D7);
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--pink);
+      outline-offset: 4px;
+    }
+
+    .page {
+      width: min(100% - 32px, 760px);
+      margin: 0 auto;
+      padding: 64px 0 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--pink);
+    }
+
+    /* ===== 2. หน้าแรก ===== */
+    .hero {
+      text-align: center;
+      padding: 20px 12px 46px;
+    }
+
+    .hero-heart {
+      font-size: 54px;
+      color: var(--pink);
+      animation: heartbeat 2s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: clamp(30px, 6vw, 48px);
+      line-height: 1.5;
+      font-weight: normal;
+      margin: 15px 0;
+      color: var(--dark-pink);
+    }
+
+    .intro {
+      font-family: Tahoma, sans-serif;
+      font-size: 14px;
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 14px 26px;
+      border: 1px solid var(--pink);
+      border-radius: 40px;
+      background: var(--pink);
+      color: white;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .button:hover {
+      background: var(--dark-pink);
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      color: var(--dark-pink);
+      background: transparent;
+    }
+
+    .button.secondary:hover {
+      background: #f7e6e2;
+    }
+
+    /* ===== 3. กระดาษจดหมาย ===== */
+    .letter {
+      background: rgba(255, 250, 245, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: clamp(24px, 6vw, 54px);
+      box-shadow: 0 18px 55px #8e615b12;
+      position: relative;
+    }
+
+    .letter::before {
+      content: "♡";
+      position: absolute;
+      right: 22px;
+      top: 12px;
+      font-size: 24px;
+      color: #d9a6a8;
+    }
+
+    .letter-top {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .letter h2 {
+      font-weight: normal;
+      font-size: 27px;
+      line-height: 1.6;
+      color: var(--dark-pink);
+      margin: 12px 0;
+    }
+
+    .letter-body {
+      font-family: Tahoma, sans-serif;
+      font-size: 15px;
+      line-height: 2.15;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .letter-body p {
+      margin: 0 0 22px;
+    }
+
+    .signature {
+      text-align: right;
+      color: var(--dark-pink);
+      line-height: 2;
+      margin-top: 34px;
+    }
+
+    /* ===== 4. ข้อความปิดท้าย ===== */
+    .ending {
+      text-align: center;
+      padding: 46px 10px 30px;
+    }
+
+    .ending h2 {
+      font-weight: normal;
+      color: var(--dark-pink);
+      font-size: 26px;
+      line-height: 1.7;
+    }
+
+    .ending p {
+      font-family: Tahoma, sans-serif;
+      font-size: 14px;
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      padding: 24px 0 12px;
+    }
+
+    /* ===== 5. เอฟเฟกต์หัวใจ ===== */
+    .floating-heart {
+      position: fixed;
+      bottom: -35px;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+      color: #d89ba5;
+      animation: float-up linear forwards;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes float-up {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.65;
+      }
+      to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding-top: 34px;
+      }
+
+      .letter-body {
+        font-size: 14px;
+      }
+
+      .hero {
+        padding-bottom: 30px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- หน้าแรก -->
+    <section class="hero">
+      <div class="hero-heart" aria-hidden="true">♡</div>
+
+      <p class="eyebrow">A LETTER FROM MY HEART</p>
+
+      <h1>ถึงไอตุดตังเม</h1>
+
+      <p class="intro">
+        มีอะไรบางอย่างอบากจะบอก<br>
+        แต่ไม่กล้าพูด<br>
+        เลยตั้งใจเขียนมันไว้ในนี้
+      </p>
+
+      <button class="button" id="openButton">
+        ♡
+      </button>
+    </section>
+
+    <!-- จดหมาย -->
+    <section class="letter" id="letter" hidden>
+      <div class="letter-top">
+        <p class="eyebrow">JUST FOR YOU</p>
+        <h2>ถึงไอตุดของฉัน</h2>
+        <p class="intro">มีเรื่องอยากบอก</p>
+      </div>
+
+      <div class="letter-body">
+        <p>♡
+		
+			ไม่แน่ใจเหมือนกันว่าจะเริ่มต้นยังไงดีเพราะมีหลายอย่างที่อยากบอก แต่พอคิดถึงเรื่องนี้บางครั้ง ฉันไม่รู้ว่าจะเรียบเรียงข้อความนั้นออกมายังไง
+        เลยอยากใช้พื้นที่เล็กๆตรงนี้บอกเธอในสิ่งที่อยู่ในใจฉันมาตลอด
+		
+        พักหลังมาฉํนรู้สึกว่าเราคุยกันน้อยลงและมีปัญหากันบ่อยขึ้นก้เลยทำให้ฉันคิดมากเรื่องนี้มาสักพัก
+        ให้พูดตรงๆเลย ฉันกลัวว่าความสัมพันธ์ของจะไม่เหมือนเดิมฉันกลัวว่าเธอจะเหนื่อยใจกับฉัน เหนื่อยกับนิสัยแย่ๆของฉัน
+        ฉันขอโทษที่ทำตัวแย่ๆเอาแต่ใจนิสัยไม่ดีพูดจาหมาไม่รับประทานใสเธอ ฉันรู้ว่ามันทำให้เธอรู้สึกแย่และเสียใจมากๆ
+        ในตอนที่เราไม่ได้คุยกันความคิดในหัวฉันก็เริ่มคิดเรื่องเพ้อๆ ทั้งที่บางเรื่องมันอาจไม่ได้เกิดขึ้นจริงเลยด้วยซ้ำ จนผลอเอามันไปลงกับเธอ
+        ฉันกลัวว่าเธอจะทิ้งฉัน กลัวว่าเธอจะเบื่อฉัน เธอจะไม่ต้องการฉันแล้ว ฉันแอบนอยกับตัวเองอยุ่บ่อยๆ
+        
+			ขอโทษนะที่เอาแต่สนใจความกลัวของตัวเองจนลืมมองว่าเธอกำลังรู้สึกยังไง
+		ฉันไม่ได้อยากให้เธอต้องคอยพิสูจน์ความรักให้เราตลอดเวลา
+        ฉันไม่อยากให้เธอต้องเหนื่อยกับการคอยทำให้ฉันมั่นใจอยู่เสมอ
+		ฉันจะปรับตัวและเรียนรู้เรื่องต่างๆโดยไม่ปล่อยให้ความคิดแย่เข้ามา
+        ฉันอยากจะขอโอกาศให้ฉันได้ปรับตัวและพัฒทนาตัวเอง
+        แต่ถ้าเธอเหนื่อยแล้ว ไม่อยากจะไปต่อเธอบอกฉันได้เสมอนะ
+		แล้วก็ฉันรักเธอเสมอฉันไม่เคยรำคาญเธอเลย ไม่เคยคิดว่าเธอกวนด้วยฉันอยากคุยกับเธอเสมอ:3<p>
+		
+		<p>รักเธอนะ ♡</p>
+      </div>
+
+      <div class="signature">
+        ด้วยความรู้สึกทั้งหมดที่มี<br>
+                ♡
+      </div>
+    </section>
+
+    <!-- ข้อความสุดท้าย -->
+    <section class="ending" id="ending" hidden>
+      <div style="font-size: 35px; color: #bd7481;">୨ৎ</div>
+
+      <h2>สุดท้ายนี้...</h2>
+
+      <p>
+        ขอบคุณที่อ่านมาจนถึงตรงนี้นะ<br>
+        ไม่รู้ว่าเธอจะรู้สึกยังไงเมื่อได้อ่านข้อความนี้<br>
+        แต่ฉันอยากให้เธอรู้ว่า ทุกคำเขียนขึ้นด้วยความตั้งใจจริง
+      </p>
+
+      <p style="color: #bd7481; font-size: 18px;">
+        I'm glad that you're here ♡
+      </p>
+
+      <button class="button secondary" id="backButton">
+        อ่านจดหมายอีกครั้ง
+      </button>
+    </section>
+
+    <footer>
+      WRITTEN WITH LOVE ♡
+    </footer>
+
+  </main>
+
+  <script>
+    // ===== ปุ่มเปิดจดหมาย =====
+    const openButton = document.getElementById("openButton");
+    const letter = document.getElementById("letter");
+    const ending = document.getElementById("ending");
+    const backButton = document.getElementById("backButton");
+
+    openButton.addEventListener("click", function () {
+      letter.hidden = false;
+      ending.hidden = false;
+      openButton.hidden = true;
+
+      letter.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    // ===== ปุ่มอ่านซ้ำ =====
+    backButton.addEventListener("click", function () {
+      letter.hidden = true;
+      ending.hidden = true;
+      openButton.hidden = false;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // ===== หัวใจลอย =====
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (!reduceMotion) {
+      function createHeart() {
+        const heart = document.createElement("span");
+
+        heart.className = "floating-heart";
+        heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize =
+          (12 + Math.random() * 17) + "px";
+        heart.style.animationDuration =
+          (7 + Math.random() * 5) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(function () {
+          heart.remove();
+        }, 12000);
+      }
+
+      setInterval(createHeart, 1200);
+    }
+  </script>
+
+</body>
+</html>
